@@ -1,1 +1,7 @@
-Historical_Live_Data/HLD/
+.venv/
+
+.env
+.env.*
+
+__pycache__/
+*.pyc
