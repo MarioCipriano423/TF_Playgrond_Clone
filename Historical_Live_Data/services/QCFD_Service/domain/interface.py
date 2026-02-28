@@ -2,12 +2,14 @@
 Domain interface for modules
 '''
 
-from src.extract.logic import Extract
+from .src.extract.logic import Extract
 
 class Interface():
 
-    def __init__(self, module):
-        self.module = module
+    extract = Extract()
+
+    def __init__(self):
+        pass
 
     def execute_module(self, *args, **kwargs):
-        return self.module.run_module(*args, **kwargs)
+        return self.extract.run_module(*args, **kwargs)
