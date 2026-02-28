@@ -2,7 +2,7 @@
 Extract class
 '''
 
-from domain.base_class import BaseClass
+from services.test_service.src.base_class import BaseClass
 
 class Extract(BaseClass):
 

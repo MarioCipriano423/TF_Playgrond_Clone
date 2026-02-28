@@ -2,7 +2,7 @@
 Domain interface for modules
 '''
 
-from .src.extract.logic import Extract
+from .extract.logic import Extract
 
 class Interface():
 

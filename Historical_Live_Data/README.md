@@ -3,8 +3,7 @@
 DCHU_NightShift/
 |
 ├─ services/
-| ├─ QCFD_service/
-| | ├─ run.py
+| ├─ first_service/
 | | |
 | | ├─ domain/
 | | │ ├─ base_class.py
@@ -22,7 +21,7 @@ DCHU_NightShift/
 | | ├─ config/
 | | └─ Dockerfile
 | |
-| └─another_service/...
+| └─second_service/...
 |
 ├─ data/
 |
