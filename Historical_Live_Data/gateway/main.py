@@ -1,13 +1,12 @@
-from fastapi import FastAPI
+'''
+'''
 
-from services.test_service.src.interface import Interface
+from fastapi import FastAPI, UploadFile, File
+from pipeline import execute_pipeline
 
 app = FastAPI()
 
-@app.get("/extract")
-def run_extract():
-
-    extractor = Interface()
-    result = extractor.execute_module()
-
-    return {"message": result}
+@app.get("/run-pipeline")
+async def run_pipeline(file: UploadFile = File(...)):
+    result = await execute_pipeline(file)
+    return result
