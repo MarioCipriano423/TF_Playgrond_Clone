@@ -5,7 +5,9 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
-TRANSFORM_DIR = "../transform_service/transformed"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+TRANSFORM_DIR = os.path.join(BASE_DIR, "..", "..", "transform_service", "transformed")
 PLOTS_DIR = "visualization_service/plots"
 
 os.makedirs(PLOTS_DIR, exist_ok=True)
@@ -18,23 +20,26 @@ def generate_visualization(transformed_id: str):
     
     df = pd.read_csv(input_path)
 
-    required_columns = [
-        "sepal length (cm)",
-        "petal length (cm)",
-        "target"
-    ]
+    required_columns = {
+        "Id",
+        "SepalLengthCm",
+        "SepalWidthCm",
+        "PetalLengthCm",
+        "PetalWidthCm",
+        "Species"
+    }
 
     for col in required_columns:
         if col not in df.columns:
             raise ValueError(f"Columna requerida '{col}' no encontrada")
         
     plt.figure()
-    for target_value in df["target"].unique():
-        subset = df[df["target"] == target_value]
+    for target_value in df["Species"].unique():
+        subset = df[df["Species"] == target_value]
 
         plt.scatter(
-            subset["sepal length (cm)"],
-            subset["petal lenght (cm)"],
+            subset["SepalLengthCm"],
+            subset["PetalLengthCm"],
             label=f"Class {target_value}"
         )
 

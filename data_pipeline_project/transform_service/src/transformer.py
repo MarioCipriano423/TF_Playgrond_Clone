@@ -22,18 +22,19 @@ def transform_dataset(dataset_id: str):
     df = pd.read_csv(input_path)
 
     expected_columns = {
-        "sepal length (cm)",
-        "sepal width (cm)",
-        "petal length (cm)",
-        "petal width (cm)",
-        "target"
+        "Id",
+        "SepalLengthCm",
+        "SepalWidthCm",
+        "PetalLengthCm",
+        "PetalWidthCm",
+        "Species"
     }
 
     if not expected_columns.issubset(set(df.columns)):
         raise ValueError("El archivo no tiene las columnas esperadas del dataset iris")
     
-    features = df.drop(columns=["target"])
-    target = df["target"]
+    features = df.drop(columns=["Species"])
+    target = df["Species"]
 
     scaler = StandardScaler()
     scaled_features = scaler.fit_transform(features)
@@ -43,7 +44,7 @@ def transform_dataset(dataset_id: str):
         columns=features.columns
     )
 
-    df_scaled["target"] = target
+    df_scaled["Species"] = target
 
     transformed_id = dataset_id + "_T"
 
