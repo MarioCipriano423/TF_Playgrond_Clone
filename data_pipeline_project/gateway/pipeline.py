@@ -1,11 +1,19 @@
-import httpx
+'''
+'''
 
-LOAD_URL = "https://127.0.0.1:8001/load"
-TRANSFORM_URL = "https://127.0.0.1:8002/transform"
-VISUALIZE_URL = "https://127.0.0.1:8003/visualize"
+import os
+import httpx
+from dotenv import load_dotenv
+
+load_dotenv()
+
+HOST = os.getenv("HOST")
+
+LOAD_URL = f"http://{HOST}:{os.getenv('LOAD_SERVICE_PORT')}/load"
+TRANSFORM_URL = f"http://{HOST}:{os.getenv('TRANSFORM_SERVICE_PORT')}/transform"
+VISUALIZE_URL = f"http://{HOST}:{os.getenv('VISUALIZATION_SERVICE_PORT')}/visualize"
 
 async def execute_pipeline(file):
-
     async with httpx.AsyncClient() as client:
 
         load_response = await client.post(

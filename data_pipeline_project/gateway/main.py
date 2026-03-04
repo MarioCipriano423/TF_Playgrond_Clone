@@ -1,8 +1,13 @@
 '''
 '''
 
+import os
+from dotenv import load_dotenv
+import uvicorn
 from fastapi import FastAPI, UploadFile, File
 from .pipeline import execute_pipeline
+
+load_dotenv()
 
 app = FastAPI()
 
@@ -10,3 +15,11 @@ app = FastAPI()
 async def run_pipeline(file: UploadFile = File(...)):
     result = await execute_pipeline(file)
     return result
+
+if __name__ == "__main__":
+    uvicorn.run(
+        "main:app",
+        host=os.getenv("HOST"),
+        port=int(os.getenv("GATEWAY_PORT")),
+        reload=True
+    )

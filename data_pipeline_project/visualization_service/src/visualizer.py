@@ -6,7 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 TRANSFORM_DIR = "../transform_service/transformed"
-PLOTS_DIR = "plots"
+PLOTS_DIR = "visualization_service/plots"
 
 os.makedirs(PLOTS_DIR, exist_ok=True)
 

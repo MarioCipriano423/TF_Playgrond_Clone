@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 # Cargar variables del .env
 load_dotenv()
 
-HOST = os.getenv("GATEWAY_HOST")
+HOST = os.getenv("HOST")
 PORT = os.getenv("GATEWAY_PORT")
 
 GATEWAY_URL = f"http://{HOST}:{PORT}/run-pipeline"
