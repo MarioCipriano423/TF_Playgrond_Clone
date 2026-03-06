@@ -5,7 +5,7 @@ import uuid
 import os
 from fastapi import UploadFile
 
-DATA_DIR = "load_service/datasets"
+DATA_DIR = "/data/datasets"
 os.makedirs(DATA_DIR, exist_ok=True)
 
 async def load_file(file: UploadFile):

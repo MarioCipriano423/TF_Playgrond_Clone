@@ -8,8 +8,8 @@ from sklearn.preprocessing import StandardScaler
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-LOAD_DATA_DIR = os.path.join(BASE_DIR, "..", "..", "load_service", "datasets")
-TRANSFORM_DIR = "transform_service/transformed"
+LOAD_DATA_DIR = "/data/datasets"
+TRANSFORM_DIR = "/data/transformed"
 
 os.makedirs(TRANSFORM_DIR, exist_ok=True)
 

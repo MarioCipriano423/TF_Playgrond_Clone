@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-TRANSFORM_DIR = os.path.join(BASE_DIR, "..", "..", "transform_service", "transformed")
-PLOTS_DIR = "visualization_service/plots"
+TRANSFORM_DIR = "/data/transformed"
+PLOTS_DIR = "/data/plots"
 
 os.makedirs(PLOTS_DIR, exist_ok=True)
 

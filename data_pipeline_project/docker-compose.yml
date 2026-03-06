@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+  gateway:
+    build: ./gateway
+    container_name: gateway
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - load_service
+      - transform_service
+      - visualization_service
+    networks:
+      - pipeline_net
+
+  load_service:
+    build: ./load_service
+    container_name: load_service
+    volumes:
+      - pipeline_data:/data
+    env_file:
+      - .env
+    networks:
+      - pipeline_net
+
+  transform_service:
+    build: ./transform_service
+    container_name: transform_service
+    volumes:
+      - pipeline_data:/data
+    env_file:
+      - .env
+    networks:
+      - pipeline_net
+
+  visualization_service:
+    build: ./visualization_service
+    container_name: visualization_service
+    volumes:
+      - pipeline_data:/data
+    ports:
+      - "8003:8003"
+    env_file:
+      - .env
+    networks:
+      - pipeline_net
+
+volumes:
+  pipeline_data:
+
+networks:
+  pipeline_net:
