@@ -1,3 +1,4 @@
+# pyright: reportMissingImports=false
 '''
 '''
 
@@ -15,11 +16,3 @@ app = FastAPI()
 async def run_pipeline(file: UploadFile = File(...)):
     result = await execute_pipeline(file)
     return result
-
-if __name__ == "__main__":
-    uvicorn.run(
-        "main:app",
-        host=os.getenv("HOST"),
-        port=int(os.getenv("GATEWAY_PORT")),
-        reload=True
-    )
