@@ -1,8 +1,9 @@
+# pyright: reportMissingImports=false
+# pyright: reportMissingModuleSource=false
 '''
 '''
 
 import os
-import uuid
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 

@@ -1,0 +1,6 @@
+#main.py
+fastapi[standard]
+
+#transformer.py
+pandas
+scikit-learn

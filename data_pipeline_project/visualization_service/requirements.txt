@@ -1,0 +1,6 @@
+#visualization_service/main.py
+fastapi[standard]
+
+#visualization_service/visualizer.py
+pandas
+matplotlib

@@ -1,13 +1,9 @@
+# pyright: reportMissingImports=false
 '''
 '''
 
-import os
-from dotenv import load_dotenv
-import uvicorn
 from fastapi import FastAPI, UploadFile, File
 from .src.loader import load_file
-
-load_dotenv()
 
 app = FastAPI()
 

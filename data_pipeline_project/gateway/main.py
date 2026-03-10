@@ -2,13 +2,8 @@
 '''
 '''
 
-import os
-from dotenv import load_dotenv
-import uvicorn
 from fastapi import FastAPI, UploadFile, File
 from .pipeline import execute_pipeline
-
-load_dotenv()
 
 app = FastAPI()
 
