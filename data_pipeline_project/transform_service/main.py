@@ -3,7 +3,7 @@
 '''
 
 from fastapi import FastAPI
-from .src.transformer import transform_dataset
+from src.transformer import transform_dataset
 
 app = FastAPI()
 

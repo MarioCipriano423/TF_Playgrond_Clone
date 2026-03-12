@@ -3,7 +3,7 @@
 '''
 
 from fastapi import FastAPI, UploadFile, File
-from .pipeline import execute_pipeline
+from pipeline import execute_pipeline
 
 app = FastAPI()
 

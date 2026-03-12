@@ -3,7 +3,7 @@
 '''
 
 from fastapi import FastAPI, UploadFile, File
-from .src.loader import load_file
+from src.loader import load_file
 
 app = FastAPI()
 

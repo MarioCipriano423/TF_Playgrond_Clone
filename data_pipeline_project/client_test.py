@@ -1,40 +1,46 @@
-import os
+# pyright: reportMissingImports=false
+# pyright: reportMissingModuleSource=false
+'''
+'''
 import requests
-from dotenv import load_dotenv
 
-# Cargar variables del .env
-load_dotenv()
-
-HOST = os.getenv("HOST")
-PORT = os.getenv("GATEWAY_PORT")
-
-GATEWAY_URL = f"http://{HOST}:{PORT}/run-pipeline"
-
-FILE_PATH = "data/iris.csv"
+GATEWAY_URL = "http://localhost:8000/run-pipeline"
 
 
 def upload_file():
-    try:
-        with open(FILE_PATH, "rb") as f:
-            files = {
-                "file": ("iris.csv", f, "text/csv")
-            }
 
-            print(f"Enviando archivo a {GATEWAY_URL}")
-            response = requests.post(GATEWAY_URL, files=files)
+    with open("data/iris.csv", "rb") as f:
+        files = {
+            "file": ("iris.csv", f, "text/csv")
+        }
 
-        if response.status_code == 200:
-            with open("output.png", "wb") as img:
-                img.write(response.content)
+        print(f"Enviando archivo a {GATEWAY_URL}")
+        response = requests.post(GATEWAY_URL, files=files)
 
-            print("Imagen guardada como output.png")
+    if response.status_code != 200:
+        print("Error:", response.status_code)
+        print(response.text)
+        return
 
-        else:
-            print("Error:", response.status_code)
-            print(response.text)
+    data = response.json()
 
-    except Exception as e:
-        print("Error en el cliente:", str(e))
+    plot_url = data["plot_url"]
+
+    # ⚠️ el gateway normalmente debe regresarte la URL completa
+    image_url = f"http://localhost:8000{plot_url}"
+
+    print("Descargando imagen desde:", image_url)
+
+    img_response = requests.get(image_url)
+
+    if img_response.status_code == 200:
+        with open("output.png", "wb") as img:
+            img.write(img_response.content)
+
+        print("Imagen guardada como output.png")
+
+    else:
+        print("Error descargando imagen:", img_response.status_code)
 
 
 if __name__ == "__main__":
