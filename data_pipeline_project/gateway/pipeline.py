@@ -11,8 +11,11 @@ load_dotenv()
 LOAD_URL = f"{os.getenv('LOAD_SERVICE_URL')}/load"
 TRANSFORM_URL = f"{os.getenv('TRANSFORM_SERVICE_URL')}/transform"
 VISUALIZE_URL = f"{os.getenv('VISUALIZATION_SERVICE_URL')}/visualize"
+VISUALIZATION_BASE = os.getenv("VISUALIZATION_SERVICE_URL")
+
 
 async def execute_pipeline(file):
+
     async with httpx.AsyncClient() as client:
 
         load_response = await client.post(
@@ -32,4 +35,8 @@ async def execute_pipeline(file):
             json={"transformed_id": transformed_id}
         )
 
-        return visualize_response.json()
+        data = visualize_response.json()
+
+        data["internal_plot_url"] = f"{VISUALIZATION_BASE}{data['plot_url']}"
+
+        return data
