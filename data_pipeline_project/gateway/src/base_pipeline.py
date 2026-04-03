@@ -9,5 +9,5 @@ class BasePipeline(ABC):
         pass
 
     @abstractmethod
-    def execute_pipeline(self):
+    def execute(self):
         pass

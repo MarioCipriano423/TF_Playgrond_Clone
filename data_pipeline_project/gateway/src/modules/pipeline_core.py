@@ -1,14 +1,13 @@
 # pyright: reportMissingImports=false
 # pyright: reportMissingModuleSource=false
 
-from src.base_pipeline import BasePipeline
 import os
 import httpx
 from dotenv import load_dotenv
 
 load_dotenv()
 
-class Pipeline(BasePipeline):
+class Pipeline():
 
     LOAD_URL = f"{os.getenv('LOAD_SERVICE_URL')}/load"
     TRANSFORM_URL = f"{os.getenv('TRANSFORM_SERVICE_URL')}/transform"

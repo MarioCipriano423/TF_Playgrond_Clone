@@ -24,9 +24,9 @@ app.add_middleware(
 )
 
 @app.post("/run-pipeline")
-async def run_pipeline(file: UploadFile = File(...)):
+async def run_pipeline():
 
-    result = await pipeline.run_pipeline(file)
+    result = await pipeline.run_pipeline()
 
     image_url = result["internal_plot_url"]
 
