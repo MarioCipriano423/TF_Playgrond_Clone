@@ -20,25 +20,31 @@ class Pipeline():
     def setup(self):
         pass
 
-    async def execute_pipeline(self, file):
+    async def execute_pipeline(self, playgrond_config):
 
         async with httpx.AsyncClient() as client:
 
             load_response = await client.post(
                 self.LOAD_URL,
-                files={"file": (file.filename, await file.read())}
+                json={"playgrond_config": playgrond_config}
             )
             dataset_id = load_response.json()["dataset_id"]
 
             transform_response = await client.post(
                 self.TRANSFORM_URL,
-                json={"dataset_id": dataset_id}
+                json={
+                    "playgrond_config": playgrond_config,
+                    "dataset_id": dataset_id
+                    }
             )
             transformed_id = transform_response.json()["transformed_id"]
 
             visualize_response = await client.post(
                 self.VISUALIZE_URL,
-                json={"transformed_id": transformed_id}
+                json={
+                    "playgrond_config": playgrond_config,
+                    "transformed_id": transformed_id
+                    }
             )
 
             data = visualize_response.json()

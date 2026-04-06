@@ -1,7 +1,7 @@
 # pyright: reportMissingImports=false
 # pyright: reportMissingModuleSource=false
 
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from src.pipeline_interface import PipelineInterface
@@ -24,9 +24,9 @@ app.add_middleware(
 )
 
 @app.post("/run-pipeline")
-async def run_pipeline(env_config):
+async def run_pipeline(playground_config):
 
-    result = await pipeline.run_pipeline(env_config)
+    result = await pipeline.run_pipeline(playground_config)
 
     image_url = result["internal_plot_url"]
 
