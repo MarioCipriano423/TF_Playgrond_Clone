@@ -25,15 +25,17 @@ app.add_middleware(
 
 @app.post("/run-pipeline")
 async def run_pipeline(playground_config):
-
-    result = await pipeline.run_pipeline(playground_config)
-
-    image_url = result["internal_plot_url"]
-
+    ORCHESTRATOR_URL = ""
+    
+    # Gateway POST -> Orchestrator -> Response (image URL)
     async with httpx.AsyncClient() as client:
-        img_response = await client.get(image_url)
+        pipeline_response = await client.post(
+            ORCHESTRATOR_URL,
+            json={"playground_config": playground_config}
+        )
+        result = pipeline_response.json()
 
-    return StreamingResponse(
-        io.BytesIO(img_response.content),
-        media_type="image/png"
-    )
+    # image URL -> client -> download 
+    return {
+        "image_url": result["internal_plot_url"]
+    }
