@@ -15,6 +15,16 @@ services:
     networks:
       - pipeline_net
 
+  orchestrator:
+    build: ./orchestrator
+    container_name: orchestrator
+    volumes:
+      - pipeline_data:/data
+    env_file:
+      - .env
+    networks:
+      - pipeline_net
+
   load_service:
     build: ./load_service
     container_name: load_service

@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Separate in reusable modules for the orchestrator 
 class Pipeline():
 
     LOAD_URL = f"{os.getenv('LOAD_SERVICE_URL')}/load"
