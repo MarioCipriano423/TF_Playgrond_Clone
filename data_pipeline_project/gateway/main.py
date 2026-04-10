@@ -23,9 +23,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+ORCHESTRATOR_URL = ""
+
 @app.post("/run-pipeline")
 async def run_pipeline(playground_config):
-    ORCHESTRATOR_URL = ""
     
     # Gateway POST -> Orchestrator -> Response (image URL)
     async with httpx.AsyncClient() as client:

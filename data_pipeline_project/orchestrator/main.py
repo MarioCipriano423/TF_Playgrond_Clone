@@ -7,7 +7,7 @@ from src.builder_face import Builder
 app = FastAPI()
 pb = Builder()
 
-@app.post("orchestrator")
+@app.post("/orchestrator")
 async def orchestrator(playgrund_config):
 
     # Getting playground client config for realtime-build pipeline  
